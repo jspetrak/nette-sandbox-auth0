@@ -1,0 +1,35 @@
+PS D:\Sites> composer create-project nette/web-project local.sandbox.nette
+Installing nette/web-project (v1.8.10)
+  - Installing nette/web-project (v1.8.10): Downloading (100%)
+Created project in local.sandbox.nette
+Loading composer repositories with package information
+Installing dependencies (including require-dev) from lock file
+Nothing to install or update
+Generating autoload files
+
+PS D:\Sites\local.sandbox.nette> composer require tracy/tracy
+Using version ^2.4 for tracy/tracy
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 0 installs, 1 update, 0 removals
+  - Updating tracy/tracy (v2.4.8 => v2.4.9): Loading from cache
+Writing lock file
+Generating autoload files
+
+PS D:\Sites\local.sandbox.nette> composer require auth0/auth0-php
+Using version ^5.0 for auth0/auth0-php
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 6 installs, 0 updates, 0 removals
+  - Installing firebase/php-jwt (v4.0.0): Downloading (100%)
+  - Installing guzzlehttp/promises (v1.3.1): Downloading (100%)
+  - Installing psr/http-message (1.0.1): Downloading (100%)
+  - Installing guzzlehttp/psr7 (1.4.2): Loading from cache
+  - Installing guzzlehttp/guzzle (6.3.0): Downloading (100%)
+  - Installing auth0/auth0-php (5.0.4): Downloading (100%)
+guzzlehttp/guzzle suggests installing psr/log (Required for using the Log middleware)
+Writing lock file
+Generating autoload files
+
