@@ -1,20 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
-use Nette;
+use Nette\StaticClass;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 
-
 class RouterFactory
 {
-	use Nette\StaticClass;
+	use StaticClass;
 
-	/**
-	 * @return Nette\Application\IRouter
-	 */
-	public static function createRouter()
+	public static function createRouter(): RouteList
 	{
 		$router = new RouteList;
 		$router[] = new Route('login', 'Authentication:login');

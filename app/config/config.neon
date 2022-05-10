@@ -10,16 +10,15 @@ session:
 	expiration: 14 days
 
 extensions:
-	auth0: App\Extensions\Auth0Extension
+	auth0: \Somemove\Auth0NetteExtesion\DI\Auth0NetteExtesion
 
 auth0:
-	domain: '{AUTH0_TENANT_DOMAIN}'
-	client_id: '{AUTH0_CLIENT_ID}'
-	client_secret: '{AUTH0_CLIENT_SECRET}'
-	redirect_uri: 'http://localhost/callback'
-	persist_user: false
+	domain: %AUTH0_DOMAIN%
+	clientId: %AUTH0_CLIENT_ID%
+	clientSecret: %AUTH0_CLIENT_SECRET%
+	redirectUri: 'http://localhost/callback'
+	persistUser: false
 	store: false
 
 services:
 	router: App\RouterFactory::createRouter
-	auth0Authenticator: App\Model\Auth0Authenticator

@@ -1,40 +1,49 @@
 <?php
 
-	namespace App\Presenters;
+declare(strict_types=1);
 
-	use \Tracy\Debugger;
-	use \Nette\Http\IResponse;
-	use \Nette\Application\UI\Presenter;
-	use \Nette\Application\BadRequestException;
-	use \Nette\Security\AuthenticationException;
+namespace App\Presenters;
 
-	class AuthenticationPresenter extends Presenter {
+use Auth0\SDK\Auth0;
+use Nette\Application\ForbiddenRequestException;
+use Tracy\Debugger;
+use Nette\Http\IResponse;
+use Nette\Application\UI\Presenter;
+use Nette\Security\AuthenticationException;
 
-		/** @var \Auth0\SDK\Auth0 @inject */
-		public $auth0;
+class AuthenticationPresenter extends Presenter
+{
+	private Auth0 $auth0;
 
-		public function actionLogin() {
-			$this->auth0->login();
-		}
+	public function __construct(Auth0 $auth0)
+	{
+		parent::__construct();
 
-		public function actionLogout() {
-			$this->auth0->logout();
-			$this->getUser()->logout();
-
-			$this->redirect('Homepage:');
-		}
-
-		public function actionCallback($code) {
-			try {
-				$this->getUser()->login($code);
-
-				$this->redirect('Homepage:');
-			} catch (AuthenticationException $e) {
-				Debugger::log($e, Debugger::ERROR);
-				throw new ForbiddenRequestException('User not authenticated', IResponse::S403_FORBIDDEN, $e);
-			}
-		}
-
+		$this->auth0 = $auth0;
 	}
 
-?>
+	public function actionLogin()
+	{
+		$this->auth0->login();
+	}
+
+	public function actionLogout()
+	{
+		$this->auth0->logout();
+		$this->getUser()->logout();
+
+		$this->redirect('Homepage:');
+	}
+
+	public function actionCallback($code): void
+	{
+		try {
+			$this->getUser()->login($code);
+
+			$this->redirect('Homepage:');
+		} catch (AuthenticationException $e) {
+			Debugger::log($e, Debugger::ERROR);
+			throw new ForbiddenRequestException('User not authenticated', IResponse::S403_FORBIDDEN, $e);
+		}
+	}
+}
